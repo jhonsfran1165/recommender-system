@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  bd_tesis:
+    container_name: bd_tesis
+    image: postgres:12.0
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test123
+      - POSTGRES_DB=tesis
+    expose:
+      - "5433"
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres-data-tesis:/var/lib/postgresql/data
+    # healthcheck:
+      # test: ["CMD", "/bin/bash", "/healthcheck.sh"]
+      # interval: 10s
+      # timeout: 15s
+      # retries: 3
+    # container_name: sigax_postgres
+
+oceana-core:
+  python_tesis:
+    container_name: python_tesis
+    image: jhonsfran/python-dev:3.7-v2
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - bd_tesis
+        # condition: service_healthy
+
+volumes:
+  postgres-data-tesis:
+  python_dependencies:
