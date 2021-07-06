@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "recommender-system"
+version = "0.0.1"
+description = "Python API to recommend books to end users"
+authors = ["jhonsfran"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+psycopg2-binary = "2.9.1"
+fastapi = {extras = ["all"], version = "^0.66.0"}
+SQLAlchemy = "^1.4.20"
+alembic = "^1.6.5"
+
+[tool.poetry.dev-dependencies]
+pylint = "2.4.4"
+colorama = "0.4.3"
+gitlint = "0.15.1"
+autopep8 = "1.5.6"
+pyflakes = "2.3.1"
+yapf = "0.31.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
