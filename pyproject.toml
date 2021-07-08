@@ -10,6 +10,11 @@ psycopg2-binary = "2.9.1"
 fastapi = {extras = ["all"], version = "^0.66.0"}
 SQLAlchemy = "^1.4.20"
 alembic = "^1.6.5"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+bcrypt = "^3.2.0"
+uvicorn = "~0.13.3"
+emails = "^0.5.15"
 
 [tool.poetry.dev-dependencies]
 pylint = "2.4.4"

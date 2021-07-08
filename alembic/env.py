@@ -25,12 +25,13 @@ target_metadata = None
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-HOST = os.getenv('DB_HOST', "")
-DB = os.getenv('DB_NAME', "")
-PASSWORD = os.getenv('DB_PASSWORD', "")
-USER = os.getenv('DB_USER', "")
 
-SQLALCHEMY_DATABASE_URL = "postgresql://{}:{}@{}/{}".format(USER, PASSWORD, HOST, DB)
+def get_url():
+    HOST = os.getenv('DB_HOST', "")
+    DB = os.getenv('DB_NAME', "")
+    PASSWORD = os.getenv('DB_PASSWORD', "")
+    USER = os.getenv('DB_USER', "")
+    return f"postgresql://{USER}:{PASSWORD}@{HOST}/{DB}"
 
 
 def run_migrations_offline():
@@ -45,7 +46,7 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
+    url = get_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -64,10 +65,10 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    configuration = config.get_section(config.config_ini_section)
+    configuration["sqlalchemy.url"] = get_url()
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
+        configuration, prefix="sqlalchemy.", poolclass=pool.NullPool,
     )
 
     with connectable.connect() as connection:

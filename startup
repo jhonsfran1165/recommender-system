@@ -16,12 +16,17 @@ IFS="$(printf "\n\t")"
 echo "You're runnig your app in $ENV mode"
 
 # because we don't want to handle the same scripts multiple time in each
-# repo, we decided to copy common script in this location in the docker base images
+# repo, we decided to copy common script in this location in the docker base image
 scripts_dir="/opt/scripts"
 
 # ensure database config is valid and ready to work
 python "${scripts_dir}/waitForPostgres.py"
 
-# alembic upgrade head
+# make migrations
+alembic upgrade head
+
+# tell python where is the root path of the project
+export PYTHONPATH="${PYTHONPATH}:/app"
+
 # Create initial data in DB
 python app/initial_data.py

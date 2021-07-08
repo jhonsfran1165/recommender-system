@@ -22,7 +22,7 @@ services:
   recommender-app:
     container_name: recommender-app
     image: jhonsfran/python-dev:3.7-v2
-    command: exec uvicorn --reload --host $HOST --port $PORT --log-level $LOG_LEVEL "app.main:app"
+    command: uvicorn --reload --host $HOST --port $PORT --log-level $LOG_LEVEL "app.main:app"
     env_file:
       - .env
     ports:
