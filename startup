@@ -30,3 +30,6 @@ export PYTHONPATH="${PYTHONPATH}:/app"
 
 # Create initial data in DB
 python app/initial_data.py
+
+# Init Jupyter internally
+# su-exec whale jupyter notebook --port 8888 --no-browser --ip=0.0.0.0

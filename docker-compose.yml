@@ -27,13 +27,18 @@ services:
       - .env
     ports:
       - "8000:8000"
+      # jupyter notebook
+      - "8888:8888"
     expose:
       - 8000
+      - 8888
     networks:
       default:
       recommend:
     volumes:
       - .:/opt/app
+      # because I don't want to upload data directory to the git repo I use this volume
+      - ../data:/opt/app/data
       - python_dependencies:/opt/app/.venv
     depends_on:
       - recommender-db
