@@ -1,6 +1,6 @@
 import logging
 
-from app.db.init_db import init_db, load_copies
+from app.db.init_db import init_db
 from app.db.load_copies import load_copies
 from app.db.session import SessionLocal
 
