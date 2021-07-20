@@ -121,3 +121,4 @@ env
 # local settings
 /**/local.py
 pylint.txt
+.Trash*

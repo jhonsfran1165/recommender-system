@@ -15,12 +15,13 @@ class CopyBase(BaseModel):
 
 # Properties to receive on item creation
 class CopyCreate(CopyBase):
+    id: int
     copy_title: str
 
 
 # Properties to receive on item update
 class CopyUpdate(CopyBase):
-    pass
+    copy_title: str
 
 
 # Properties shared by models stored in DB
