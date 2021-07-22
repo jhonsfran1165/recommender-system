@@ -27,5 +27,5 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_column('created_at', 'author_name')
-    op.drop_column('updated_at', 'author_name')
+    op.drop_column('copy', 'created_at')
+    op.drop_column('copy', 'updated_at')

@@ -10,7 +10,7 @@ from app.db import base  # noqa: F401
 
 
 def load_copies(db: Session) -> None:
-    chunk_iter = read_in_chunks("etl/modified.csv", header=0, sep='*')
+    chunk_iter = read_in_chunks("etl/copies_modified.csv", header=0, sep='*')
 
     # data sample
     # C.COPYNO                                                                                 58199
@@ -54,5 +54,6 @@ def load_copies(db: Session) -> None:
                         location=location
                     )
                     copy = crud.copy.create(db, obj_in=copy_in)  # noqa: F841
-                except e:
-                    print("There was an error inserting the copy", id)
+                except:
+                    print("There was an error inserting the title", id)
+                    raise
