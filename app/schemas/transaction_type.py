@@ -1,4 +1,3 @@
-from typing import Optional
 from pydantic import BaseModel
 
 
@@ -15,6 +14,7 @@ class TransactionTypeCreate(TransactionTypeBase):
 
 # Properties to receive on item update
 class TransactionTypeUpdate(TransactionTypeBase):
+    trans_type_code: str
     trans_type_description: str
 
 
@@ -22,6 +22,7 @@ class TransactionTypeUpdate(TransactionTypeBase):
 class TransactionTypeInDBBase(TransactionTypeBase):
     id: int
     trans_type_code: str
+    trans_type_description: str
 
     class Config:
         orm_mode = True
