@@ -17,8 +17,8 @@ def init() -> None:
     # INFO: load this only when it's necessary
     # load_copies(db)
     # load_titles(db)
-    # load_transaction_type(db)
-    load_locations(db)
+    load_transaction_type(db)
+    # load_locations(db)
 
 
 def main() -> None:

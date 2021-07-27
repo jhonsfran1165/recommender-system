@@ -3,6 +3,7 @@ from .crud_user import user
 from .crud_copy import copy
 from .crud_title import title
 from .crud_transaction_type import transaction_type
+from .crud_location import location
 
 # For a new basic set of CRUD operations you could just do
 

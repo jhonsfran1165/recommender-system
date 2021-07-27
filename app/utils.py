@@ -109,10 +109,14 @@ def verify_password_reset_token(token: str) -> Optional[str]:
 
 
 def read_in_chunks(file_object, chunk_size=1024, sep='*', header=None):
-    csv_reader = pd.read_csv(file_object, sep=sep, iterator=True, chunksize=chunk_size, header=header)
-    first_chunk = csv_reader.get_chunk()
-    chunk = pd.DataFrame(first_chunk)
+    csv_reader = pd.read_csv(
+        file_object,
+        sep=sep,
+        iterator=True,
+        chunksize=chunk_size,
+        header=header
+    )
+
     for l in csv_reader:
-        id = l.iloc[0,0]
-        yield chunk
         chunk = pd.DataFrame(l)
+        yield chunk

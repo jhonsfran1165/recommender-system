@@ -12,8 +12,6 @@ from app.db import base  # noqa: F401
 def load_locations(db: Session) -> None:
     chunk_iter = read_in_chunks("etl/locations_modified.csv", header=0, sep='*')
 
-    # TODO: debug this
-    print(print(chunk) for chunk in chunk_iter)
     # data sample
     # LOC                                                                                   EDU
     # LOCLD                                      Centro Doc. CENDOPU - Inst. Educación y Pedago
@@ -21,16 +19,14 @@ def load_locations(db: Session) -> None:
     for chunk in chunk_iter:
         for index, row in chunk.iterrows():
             try:
-                print("row", row['LOC'])
                 location_code = str(row['LOC'])
-                print(location_code)
             except ValueError:
                 print("The location_code is not an string... skipping", row['LOC'])
             except:
                 raise("There is an error")
 
 
-            location  = crud.location.get(
+            location  = crud.location.get_by_location_code(
                                     db,
                                     location_code=location_code
                                 )
@@ -39,7 +35,7 @@ def load_locations(db: Session) -> None:
             if not location:
                 location_name = str(row['LOCLD'])
                 try:
-                    location_in = schemas.TransactionTypeCreate(
+                    location_in = schemas.LocationCreate(
                         location_code=location_code,
                         location_name=location_name,
                     )

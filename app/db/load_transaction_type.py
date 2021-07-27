@@ -23,7 +23,7 @@ def load_transaction_type(db: Session) -> None:
             except ValueError:
                 print("The trans_type_code of the type is not an string... skipping", row['ctrantp'])
 
-            transaction_type  = crud.transaction_type.get(
+            transaction_type  = crud.transaction_type.get_by_code(
                                     db,
                                     trans_type_code=trans_type_code
                                 )

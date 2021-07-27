@@ -1,28 +1,27 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 # Shared properties
 class LocationBase(BaseModel):
-    pass
+    location_code: str
+    location_name: str
 
 
 # Properties to receive on item creation
 class LocationCreate(LocationBase):
-    location_code: str
-    location_name: str
+    pass
 
 
 # Properties to receive on item update
 class LocationUpdate(LocationBase):
-    location_code: str
-    location_name: str
+    pass
 
 
 # Properties shared by models stored in DB
 class LocationInDBBase(LocationBase):
-    id: int
-    location_code: str
-    location_name: str
+    id: Optional[int] = None
 
     class Config:
         orm_mode = True
