@@ -20,9 +20,10 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 # target_metadata = None
 from app.db.base_class import Base
+from app.models import Copy
 
 target_metadata = [
-    Base.metadata
+    Copy.metadata
 ]
 
 # other values from the config, defined by the needs of env.py,
