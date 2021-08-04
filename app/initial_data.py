@@ -15,8 +15,8 @@ def init() -> None:
     db = SessionLocal()
     # init_db(db)
     # INFO: load this only when it's necessary
-    load_copies(db)
-    load_titles(db)
+    # load_copies(db)
+    # load_titles(db)
     # load_transaction_type(db)
     # load_locations(db)
 
