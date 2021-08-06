@@ -11,11 +11,8 @@ set -o posix    # more strict failures in subshells
 # set -x          # enable debugging
 
 IFS="$(printf "\n\t")"
+# ---- End unofficial bash strict mode boilerplate
 
-# https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find . -path "*/migrations/*.pyc" -not -name "__init__.py" -delete
-
-python manage.py showmigrations
-python manage.py migrate --fake-initial
+alembic revision --autogenerate -m "${1}"

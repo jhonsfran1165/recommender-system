@@ -5,6 +5,7 @@ from app.db.load_copies import load_copies
 from app.db.load_titles import load_titles
 from app.db.load_transaction_type import load_transaction_type
 from app.db.load_locations import load_locations
+from app.db.load_dates import load_dates
 from app.db.session import SessionLocal
 
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +20,7 @@ def init() -> None:
     # load_titles(db)
     # load_transaction_type(db)
     # load_locations(db)
+    # load_dates(db)
 
 
 def main() -> None:
