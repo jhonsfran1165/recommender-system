@@ -46,4 +46,4 @@ class Copy(Base, CommonColumnsMixin):
     # TODO: is it necessary to add owner user?
 
     def __str__(self):
-        return self.id
+        return str(self.id)

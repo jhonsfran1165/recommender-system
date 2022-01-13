@@ -10,4 +10,4 @@ class TransactionType(Base, CommonColumnsMixin):
     trans_type_description = Column(String, doc="Transaction description type", comment="Transaction description type")
 
     def __str__(self):
-        return self.id
+        return str(self.id)

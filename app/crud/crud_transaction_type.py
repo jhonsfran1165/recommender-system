@@ -11,7 +11,7 @@ ModelType = TypeVar("ModelType", bound=Base)
 
 
 class CRUDTransactionType(CRUDBase[TransactionType, TransactionTypeCreate, TransactionTypeUpdate]):
-    def get_by_code(self, db: Session, trans_type_code: Any) -> Optional[ModelType]:
+    def get_by_code(self, db: Session, trans_type_code: str) -> Optional[ModelType]:
         return db.query(self.model).filter(self.model.trans_type_code == trans_type_code).first()
 
 

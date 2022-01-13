@@ -10,4 +10,4 @@ class Title(Base, CommonColumnsMixin):
     subtitle = Column(String, index=True, doc="Subtitle of the title", comment="Subtitle of the title")
 
     def __str__(self):
-        return self.id
+        return str(self.id)

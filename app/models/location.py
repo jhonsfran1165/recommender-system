@@ -10,4 +10,4 @@ class Location(Base, CommonColumnsMixin):
     location_name = Column(String, nullable=False, doc="Location name", comment="Location name")
 
     def __str__(self):
-        return self.id
+        return str(self.id)
