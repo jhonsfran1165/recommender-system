@@ -22,7 +22,7 @@ def init() -> None:
     # load_transaction_type(db)
     # load_locations(db)
     # load_dates(db)
-    load_copy_transactions(db)
+    # load_copy_transactions(db)
 
 
 def main() -> None:
