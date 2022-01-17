@@ -7,6 +7,7 @@ from app.db.load_transaction_type import load_transaction_type
 from app.db.load_locations import load_locations
 from app.db.load_dates import load_dates
 from app.db.load_copy_transactions import load_copy_transactions
+from app.db.load_student import load_student
 from app.db.session import SessionLocal
 
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +23,8 @@ def init() -> None:
     # load_transaction_type(db)
     # load_locations(db)
     # load_dates(db)
-    # load_copy_transactions(db)
+    load_copy_transactions(db)
+    # load_student(db)
 
 
 def main() -> None:

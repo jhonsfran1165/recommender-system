@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Boolean
 
 from app.db.base_class import Base
 from app.db.mixin_class import CommonColumnsMixin
@@ -10,7 +9,15 @@ class Student(Base, CommonColumnsMixin):
     id = Column(
         Integer,
         primary_key=True,
-        index=True
+        index=True,
+        autoincrement=True
+    )
+
+    code = Column(
+        Integer,
+        index=True,
+        doc="Code of the student",
+        comment="Code of the student"
     )
 
     first_name = Column(
@@ -52,7 +59,7 @@ class Student(Base, CommonColumnsMixin):
     )
 
     document = Column(
-        Integer,
+        String,
         doc="Document",
         comment="Document"
     )
@@ -118,4 +125,4 @@ class Student(Base, CommonColumnsMixin):
     )
 
     def __str__(self):
-        return self.id
+        return str(self.id)

@@ -16,3 +16,8 @@ IFS="$(printf "\n\t")"
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 alembic revision --autogenerate -m "${1}"
+
+# useful commands
+# alembic downgrade -1
+# alembic history
+# alembic downgrade 8ac14e223d1e

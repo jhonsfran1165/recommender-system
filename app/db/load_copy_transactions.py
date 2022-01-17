@@ -25,10 +25,18 @@ def load_copy_transactions(db: Session) -> None:
                 ).strftime("%Y%m%d"))
 
                 trans_type = str(row['CTRANTP'])
-                trans_borrower = str(row['BORCODE'])
                 trans_location = str(row['LOCATION'])
                 trans_title = int(row['TITLENO'])
                 trans_copy = int(row['COPYNO'])
+
+                trans_borrower = int(row['BORCODE'])
+
+                if (trans_borrower > 0000000 and trans_borrower < 2300000):
+                    trans_borrower = int('20' + row['BORCODE'])
+                elif (trans_borrower > 9000000 and trans_borrower < 9999999):
+                    trans_borrower = int('19' + row['BORCODE'])
+                elif (trans_borrower > 8000000 and trans_borrower < 8999999):
+                    trans_borrower = int('18' + row['BORCODE'])
 
                 print(
                     trans_date_id,
@@ -54,12 +62,23 @@ def load_copy_transactions(db: Session) -> None:
 
             trans_title_id = crud.title.get(db, id=trans_title)
             trans_copy_id = crud.copy.get(db, id=trans_copy)
+            trans_borrower_code = crud.student.get_by_student_code(db, code=trans_borrower)
 
             # TODO: transform to int but before check if None
             print(trans_type_id)
             print(trans_title_id)
             print(trans_copy_id)
             print(trans_location_id)
+            print(trans_borrower_code)
+
+            if (
+                trans_type_id is not None and
+                trans_title_id is not None and
+                trans_copy_id is not None and
+                trans_location_id is not None and
+                trans_borrower_code is not None
+            ):
+                print("Vamos!")
 
             # TODO: create borrower table
 
