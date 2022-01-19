@@ -28,70 +28,76 @@ def load_copy_transactions(db: Session) -> None:
                 trans_location = str(row['LOCATION'])
                 trans_title = int(row['TITLENO'])
                 trans_copy = int(row['COPYNO'])
+                trans_borrower_deleted = int(row['DELETED'])
 
                 trans_borrower = int(row['BORCODE'])
 
                 if (trans_borrower > 0000000 and trans_borrower < 2300000):
-                    trans_borrower = int('20' + row['BORCODE'])
+                    trans_borrower = int('20' + str(row['BORCODE']))
                 elif (trans_borrower > 9000000 and trans_borrower < 9999999):
-                    trans_borrower = int('19' + row['BORCODE'])
+                    trans_borrower = int('19' + str(row['BORCODE']))
                 elif (trans_borrower > 8000000 and trans_borrower < 8999999):
-                    trans_borrower = int('18' + row['BORCODE'])
+                    trans_borrower = int('18' + str(row['BORCODE']))
+
+                trans_type  = crud.transaction_type.get_by_code(
+                    db,
+                    trans_type_code=trans_type
+                )
+
+                trans_location  = crud.location.get_by_location_code(
+                    db,
+                    location_code=trans_location
+                )
+
+                trans_title = crud.title.get(db, id=trans_title)
+                trans_copy = crud.copy.get(db, id=trans_copy)
+                trans_borrower = crud.student.get_by_student_code(db, code=trans_borrower)
+
+                # TODO: transform to int but before check if None
+                print(
+                    trans_type,
+                    trans_title,
+                    trans_copy,
+                    trans_location,
+                    trans_borrower
+                )
 
                 print(
-                    trans_date_id,
-                    trans_type,
-                    trans_borrower,
-                    trans_location,
-                    trans_title,
-                    trans_copy
+                    type(trans_type),
+                    type(trans_title),
+                    type(trans_copy),
+                    type(trans_location),
+                    type(trans_borrower)
                 )
+
+                if (
+                    trans_date_id is not None and
+                    trans_type is not None and
+                    trans_title is not None and
+                    trans_copy is not None and
+                    trans_location is not None and
+                    trans_borrower is not None and
+                    trans_borrower_deleted is not None
+                ):
+                    try:
+                        copytrans_in = schemas.CopyTransactionCreate(
+                            trans_date_id=trans_date_id,
+                            trans_type_id=trans_type.id,
+                            trans_borrower_code=trans_borrower.id,
+                            trans_location_code_id=trans_location.id,
+                            trans_tittle_code_id=trans_title.id,
+                            trans_copy_code_id=trans_copy.id,
+                            trans_borrower_deleted=trans_borrower_deleted
+                        )
+
+                        copytrans_in_db = crud.copy_transaction.create(db, obj_in=copytrans_in)  # noqa: F841
+
+                        print("Copy trans added", trans_title)
+
+                    except Exception as inst:
+                        print("There was an error inserting the Copy trans", inst)
+                        raise
 
             except ValueError as error:
                 print("The transaction can't be transformed... skipping", error)
 
-            trans_type_id  = crud.transaction_type.get_by_code(
-                db,
-                trans_type_code=trans_type
-            )
-
-            trans_location_id  = crud.location.get_by_location_code(
-                db,
-                location_code=trans_location
-            )
-
-            trans_title_id = crud.title.get(db, id=trans_title)
-            trans_copy_id = crud.copy.get(db, id=trans_copy)
-            trans_borrower_code = crud.student.get_by_student_code(db, code=trans_borrower)
-
-            # TODO: transform to int but before check if None
-            print(trans_type_id)
-            print(trans_title_id)
-            print(trans_copy_id)
-            print(trans_location_id)
-            print(trans_borrower_code)
-
-            if (
-                trans_type_id is not None and
-                trans_title_id is not None and
-                trans_copy_id is not None and
-                trans_location_id is not None and
-                trans_borrower_code is not None
-            ):
-                print("Vamos!")
-
-            # TODO: create borrower table
-
-            # TODO: check if all parameters are different than none if so procede to save the transaction
-
-            # if not transaction_type:
-            #     trans_type_description = str(row['ctrantpld'])
-            #     try:
-            #         transaction_type_in = schemas.TransactionTypeCreate(
-            #             trans_type_code=trans_type_code,
-            #             trans_type_description=trans_type_description,
-            #         )
-            #         transaction_type = crud.transaction_type.create(db, obj_in=transaction_type_in)  # noqa: F841
-            #     except:
-            #         print("There was an error inserting the transaction_type", trans_type_code)
-            #         raise
