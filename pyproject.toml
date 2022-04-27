@@ -5,7 +5,7 @@ description = "Python API to recommend books to end users"
 authors = ["jhonsfran"]
 
 [tool.poetry.dependencies]
-python = ">=3.7.0,<4.0"
+python = ">=3.7.1,<4.0"
 psycopg2-binary = "2.9.1"
 fastapi = {extras = ["all"], version = "^0.66.0"}
 SQLAlchemy = "^1.4.20"

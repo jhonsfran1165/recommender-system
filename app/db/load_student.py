@@ -17,6 +17,10 @@ def load_student(db: Session) -> None:
     for chunk in chunk_iter:
         for index, row in chunk.iterrows():
             try:
+                m_bajos = True if row['m_bajos'] == 't' else False
+                m_tesis = True if row['m_tesis'] == 't' else False
+                m_activo = True if row['m_activo'] == 't' else False
+                m_grado = True if row['m_grado'] == 't' else False
 
                 code = int(row['codigo'])
                 nombre = row['nombre']
@@ -26,13 +30,9 @@ def load_student(db: Session) -> None:
                 jornada = row['jornada']
                 tipo_doc = row['tipo_doc']
                 doc = row['doc']
-                m_bajos = bool(row['m_bajos'])
                 per_matriculados = int(row['per_matriculados'])
                 per_cancelados = int(row['per_cancelados'])
-                m_tesis = bool(row['m_tesis'])
-                m_activo = bool(row['m_activo'])
                 m_periodo_activo = row['m_periodo_activo']
-                m_grado = bool(row['m_grado'])
                 sexo = row['sexo']
                 fecha_nacimiento = row['Fecha_nacimiento']
                 estrato = int(row['Estrato'])

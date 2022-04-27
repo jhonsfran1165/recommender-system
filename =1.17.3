@@ -1,0 +1,31 @@
+Using version ^1.22.3 for numpy
+
+Updating dependencies
+Resolving dependencies...
+
+  SolverProblemError
+
+  The current project's Python requirement (>=3.7.1,<4.0) is not compatible with some of the required packages Python requirement:
+    - numpy requires Python >=3.8, so it will not be satisfied for Python >=3.7.1,<3.8
+  
+  Because numpy (1.22.3) requires Python >=3.8
+   and no versions of numpy match >1.22.3,<2.0.0, numpy is forbidden.
+  So, because recommender-system depends on numpy (^1.22.3), version solving failed.
+
+  at /opt/poetry/lib/poetry/puzzle/solver.py:241 in _solve
+      237│             packages = result.packages
+      238│         except OverrideNeeded as e:
+      239│             return self.solve_in_compatibility_mode(e.overrides, use_latest=use_latest)
+      240│         except SolveFailure as e:
+    → 241│             raise SolverProblemError(e)
+      242│ 
+      243│         results = dict(
+      244│             depth_first_search(
+      245│                 PackageNode(self._package, packages), aggregate_package_nodes
+
+  • Check your dependencies Python requirement: The Python requirement can be specified via the `python` or `markers` properties
+    
+    For numpy, a possible solution would be to set the `python` property to ">=3.8,<4.0"
+
+    https://python-poetry.org/docs/dependency-specification/#python-restricted-dependencies,
+    https://python-poetry.org/docs/dependency-specification/#using-environment-markers
