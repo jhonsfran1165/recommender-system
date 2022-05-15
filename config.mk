@@ -21,7 +21,8 @@ endef
 # Defined here are the project configuration
 define SERVICES
 recommender-app \
-recommender-db
+recommender-db \
+recommender-search
 endef
 
 # List of user defined networks that should be created.

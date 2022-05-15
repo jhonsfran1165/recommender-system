@@ -19,9 +19,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  recommender-search:
+    container_name: recommender-search
+    image: getmeili/meilisearch:v0.27.0
+    networks:
+      default:
+      recommend:
+    env_file:
+      - .env
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+
   recommender-app:
     container_name: recommender-app
-    image: jhonsfran/python-dev:3.7-v2
+    image: jhonsfran/python-dev:3.8-v1
     command: uvicorn --reload --host $HOST --port $PORT --log-level $LOG_LEVEL "app.main:app"
     env_file:
       - .env
@@ -46,3 +59,4 @@ services:
 volumes:
   postgres_data:
   python_dependencies:
+  meilisearch_data:

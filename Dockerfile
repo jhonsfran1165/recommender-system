@@ -1,5 +1,5 @@
 # `jhonsfran/python-prod` sets up all our shared all configuration
-FROM jhonsfran/python-prod:3.7-v2
+FROM jhonsfran/python-prod:3.8-v1
 
 ARG COMMIT_ID
 ARG PROJECT_VERSION
