@@ -6,6 +6,7 @@ from .crud_location import location
 from .crud_date import date
 from .crud_student import student
 from .crud_copy_transactions import copy_transaction
+from .crud_rule import rule
 
 # For a new basic set of CRUD operations you could just do
 

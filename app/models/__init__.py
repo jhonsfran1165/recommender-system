@@ -6,3 +6,4 @@ from .location import Location
 from .date import Date
 from .copy_transaction import CopyTransaction
 from .student import Student
+from .rule import Rule

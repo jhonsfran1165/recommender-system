@@ -9,6 +9,7 @@ from app.db.load_dates import load_dates
 from app.db.load_copy_transactions import load_copy_transactions
 from app.db.load_student import load_student
 from app.db.update_student import update_student
+from app.db.load_rules import load_rules
 from app.db.session import SessionLocal
 
 logging.basicConfig(level=logging.INFO)
@@ -27,6 +28,7 @@ def init() -> None:
     # load_copy_transactions(db)
     # load_student(db)
     # update_student(db)
+    load_rules(db)
 
 
 def main() -> None:
