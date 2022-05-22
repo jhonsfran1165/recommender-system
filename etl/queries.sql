@@ -34,3 +34,10 @@ WHERE
 	trans_location_code_id = 5 and
 	trans_type_code = 'ISS'
 GROUP BY code, trans_date_id, copy.id LIMIT 10000
+
+-- rules
+SELECT
+	consequents, copy_title, author_name, medium_type, pr_classmark, shelfmark, bar_code, location,
+	antecedent_support, consequent_support, support, confidence, lift, leverage, conviction
+FROM public.rule, public.copy
+WHERE antecedents = 7698 AND consequents = copy.id

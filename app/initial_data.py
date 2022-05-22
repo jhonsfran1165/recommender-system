@@ -28,7 +28,7 @@ def init() -> None:
     # load_copy_transactions(db)
     # load_student(db)
     # update_student(db)
-    load_rules(db)
+    # load_rules(db)
 
 
 def main() -> None:
