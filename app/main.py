@@ -3,9 +3,11 @@ from starlette.middleware.cors import CORSMiddleware
 
 from .api.api_v1.api import api_router
 from .core.config import settings
+from .core.json_config import ORJSONResponse
 
 
 app = FastAPI(
+    default_response_class=ORJSONResponse,
     title=settings.PROJECT_NAME, openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 

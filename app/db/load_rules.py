@@ -36,8 +36,8 @@ def load_rules(db: Session) -> None:
             rule = crud.rule.get(db, id=id)
 
             if not rule:
-                antecedents = int(row['antecedents'])
-                consequents = int(row['consequents'])
+                antecedents_id = int(row['antecedents'])
+                consequents_id = int(row['consequents'])
                 antecedent_support = float(row['antecedent support'])
                 consequent_support = float(row['consequent support'])
                 support = float(row['support'])
@@ -49,8 +49,8 @@ def load_rules(db: Session) -> None:
                 try:
                     rule_in = schemas.RuleCreate(
                         id=id,
-                        antecedents=antecedents,
-                        consequents=consequents,
+                        antecedents_id=antecedents_id,
+                        consequents_id=consequents_id,
                         antecedent_support=antecedent_support,
                         consequent_support=consequent_support,
                         support=support,

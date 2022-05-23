@@ -1,33 +1,35 @@
 import json
-from typing import Any
+from typing import Any, List
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.db.session import engine
-
+from app import crud, models, schemas
 from app.api import deps
 
 router = APIRouter()
 
 
-@router.get("/rules")
+@router.get("/rules", response_model=List[schemas.Rule])
 def rules(
-    db: Session = Depends(deps.get_db)
+    db: Session = Depends(deps.get_db),
+    skip: int = 0,
+    limit: int = 100,
+    current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
-    Retrieve items.
+    Retrieve rule.
     """
-    data = engine.execute("SELECT * FROM rule LIMIT 10")
-    # result = db.session.execute('SELECT * FROM my_table WHERE my_column = :val', {'val': 5})
-    result = []
 
-    for r in data:
-        # print(r[0]) # Access by positional index
-        r_dict = dict(r.items()) # convert to dict keyed by column names
-        # print(r_dict)
-        result.append(r_dict)
+    # rule = crud.rule.get_multi(db, skip=skip, limit=limit)
+    rules = crud.rule.get_by_antecedent(db, antecedents_id=434760)
 
-    # TODO: return results rules as json
-    print(json.load(result))
-    return json.load(result)
+
+    # if crud.user.is_superuser(current_user):
+    #     rule = crud.rule.get_multi(db, skip=skip, limit=limit)
+    # else:
+    #     rule = crud.rule.get_multi(
+    #         db=db, owner_id=current_user.id, skip=skip, limit=limit
+    #     )
+
+    return rules

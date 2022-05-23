@@ -1,5 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel
+from app.schemas import Copy
 
 
 # Shared properties
@@ -16,8 +17,8 @@ class RuleBase(BaseModel):
 # Properties to receive on item creation
 class RuleCreate(RuleBase):
     id: int
-    antecedents: int
-    consequents: int
+    antecedents_id: int
+    consequents_id: int
 
 
 # Properties to receive on item update
@@ -28,6 +29,8 @@ class RuleUpdate(RuleBase):
 # Properties shared by models stored in DB
 class RuleInDBBase(RuleBase):
     id: int
+    antecedents_id: int
+    consequents_id: int
 
     class Config:
         orm_mode = True
@@ -36,7 +39,6 @@ class RuleInDBBase(RuleBase):
 # Properties to return to client
 class Rule(RuleInDBBase):
     pass
-
 
 # Properties properties stored in DB
 class RuleInDB(RuleInDBBase):

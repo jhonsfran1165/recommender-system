@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, Float
+from sqlalchemy import Column, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
 from app.db.mixin_class import CommonColumnsMixin
@@ -7,16 +8,18 @@ from app.db.mixin_class import CommonColumnsMixin
 class Rule(Base, CommonColumnsMixin):
     id = Column(Integer, primary_key=True, index=True)
 
-    antecedents = Column(
+    antecedents_id = Column(
         Integer,
+        ForeignKey('copy.id'),
         index=True,
         nullable=False,
         doc="antecedents",
         comment="antecedents"
     )
 
-    consequents = Column(
+    consequents_id = Column(
         Integer,
+        ForeignKey('copy.id'),
         index=True,
         nullable=False,
         doc="consequents",
@@ -64,6 +67,9 @@ class Rule(Base, CommonColumnsMixin):
         doc="conviction",
         comment="conviction"
     )
+
+    antecedents = relationship("Copy", foreign_keys=[antecedents_id])
+    consequents = relationship("Copy", foreign_keys=[consequents_id], lazy="selectin")
 
     def __str__(self):
         return str(self.id)

@@ -22,3 +22,7 @@ alembic revision --autogenerate -m "${1}"
 # alembic downgrade -1
 # alembic history
 # alembic downgrade 8ac14e223d1e
+
+# alembic init alembic
+
+# https://stackoverflow.com/questions/48242324/undo-last-alembic-migration#:~:text=There's%20currently%20no%20command%20to,like%204c009570237e_add_widget_table.py%20)%20manually.

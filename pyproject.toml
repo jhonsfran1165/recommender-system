@@ -26,6 +26,7 @@ mlxtend = "^0.19.0"
 efficient-apriori = "^2.0.1"
 dask = "^2022.5.0"
 meilisearch = "^0.18.3"
+orjson = "^3.6.8"
 
 [tool.poetry.dev-dependencies]
 pylint = "2.4.4"
