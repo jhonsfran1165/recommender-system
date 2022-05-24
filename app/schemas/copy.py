@@ -26,8 +26,8 @@ class CopyUpdate(CopyBase):
 
 # Properties shared by models stored in DB
 class CopyInDBBase(CopyBase):
-    id: int
-    copy_title: str
+    id: Optional[str] = None
+    copy_title: Optional[str] = None
 
     class Config:
         orm_mode = True

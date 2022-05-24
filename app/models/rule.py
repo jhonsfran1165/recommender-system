@@ -1,9 +1,12 @@
+from typing import TYPE_CHECKING
 from sqlalchemy import Column, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
 from app.db.mixin_class import CommonColumnsMixin
 
+if TYPE_CHECKING:
+    from app.models import Copy  # noqa: F401
 
 class Rule(Base, CommonColumnsMixin):
     id = Column(Integer, primary_key=True, index=True)
@@ -68,8 +71,17 @@ class Rule(Base, CommonColumnsMixin):
         comment="conviction"
     )
 
-    antecedents = relationship("Copy", foreign_keys=[antecedents_id])
-    consequents = relationship("Copy", foreign_keys=[consequents_id], lazy="selectin")
+    antecedents = relationship(
+        "Copy",
+        foreign_keys=[antecedents_id],
+        back_populates="antecedents"
+    )
+
+    consequents = relationship(
+        "Copy",
+        foreign_keys=[consequents_id],
+        back_populates="consequents"
+    )
 
     def __str__(self):
         return str(self.id)

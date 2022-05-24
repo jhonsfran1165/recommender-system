@@ -1,8 +1,13 @@
+from typing import TYPE_CHECKING
 from sqlalchemy import Column, Integer, String
 
 from app.db.base_class import Base
 from app.db.mixin_class import CommonColumnsMixin
 
+from sqlalchemy.orm import relationship
+
+if TYPE_CHECKING:
+    from app.models import Rule  # noqa: F401
 
 class Copy(Base, CommonColumnsMixin):
     id = Column(Integer, primary_key=True, index=True)
@@ -44,6 +49,19 @@ class Copy(Base, CommonColumnsMixin):
     )
 
     # TODO: is it necessary to add owner user?
+    antecedents = relationship(
+        "Rule",
+        foreign_keys="[Rule.antecedents_id]",
+        back_populates="antecedents"
+    )
+
+    consequents = relationship(
+        "Rule",
+        foreign_keys="[Rule.consequents_id]",
+        back_populates="consequents"
+    )
+
+
 
     def __str__(self):
         return str(self.id)

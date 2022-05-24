@@ -38,7 +38,8 @@ class RuleInDBBase(RuleBase):
 
 # Properties to return to client
 class Rule(RuleInDBBase):
-    pass
+    antecedents: Optional[Copy] = None
+    consequents: Optional[Copy] = None
 
 # Properties properties stored in DB
 class RuleInDB(RuleInDBBase):
