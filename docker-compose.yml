@@ -56,6 +56,21 @@ services:
     depends_on:
       - recommender-db
 
+  recommender-login:
+    container_name: recommender-login
+    image: registry.supertokens.io/supertokens/supertokens-postgresql
+    env_file:
+      - .env
+    ports:
+      - "3567:3567"
+    expose:
+      - 3567
+    networks:
+      default:
+      recommend:
+    depends_on:
+      - recommender-db
+
 volumes:
   postgres_data:
   python_dependencies:

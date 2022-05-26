@@ -22,7 +22,8 @@ endef
 define SERVICES
 recommender-app \
 recommender-db \
-recommender-search
+recommender-search \
+recommender-login
 endef
 
 # List of user defined networks that should be created.
