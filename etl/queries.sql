@@ -41,3 +41,47 @@ SELECT
 	antecedent_support, consequent_support, support, confidence, lift, leverage, conviction
 FROM public.rule, public.copy
 WHERE antecedents = 7698 AND consequents = copy.id
+
+
+-- clustering (exploring data)
+SELECT
+	trans_date_id, day_name, day_week, day_month, month, semester, year, trans_type_code,
+	trans_type_description, trans_copy_code_id, medium_type, code,
+	program, sede, jornada, bajos_rendimientos, bajos_rendimientos, per_cancelados, m_tesis,
+	m_activo, m_grado, sexo, birth_date, estrato
+FROM
+	public.copytransaction, public.transactiontype, public.copy, public.student, public.date
+WHERE
+trans_date_id = date.id AND
+trans_copy_code_id = copy.id AND
+trans_borrower_code = student.id AND
+trans_type_id = transactiontype.id AND
+trans_location_code_id = 5
+
+
+--SELECT count(id) FROM public.student;
+--SELECT count(id) FROM public.copy;
+--SELECT count(id) FROM public.title;
+--SELECT count(id) FROM public.copytransaction;
+
+
+-- Clustering
+WITH tmp_data AS (SELECT
+		code, year, month, day_month, count(trans_copy_code_id) as books
+	FROM
+		public.copytransaction, public.transactiontype, public.copy, public.student, public.date
+	WHERE
+	trans_location_code_id = 5 AND
+	trans_type_code = 'ISS' AND
+	--code = 199713183 AND
+	trans_date_id = date.id AND
+	trans_copy_code_id = copy.id AND
+	trans_borrower_code = student.id AND
+	trans_type_id = transactiontype.id
+
+	GROUP BY code, year, month, day_month)
+
+SELECT
+code, year, month, count(day_month) as frecuency, sum(books) as total
+FROM tmp_data
+GROUP BY code, year, month

@@ -22,3 +22,6 @@ https://towardsdatascience.com/data-mining-market-basket-analysis-with-apriori-a
 https://towardsdatascience.com/fp-growth-frequent-pattern-generation-in-data-mining-with-python-implementation-244e561ab1c3
 
 https://towardsdatascience.com/fp-growth-frequent-pattern-generation-in-data-mining-with-python-implementation-244e561ab1c3
+
+
+https://arno.uvt.nl/show.cgi?fid=149422

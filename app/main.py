@@ -18,14 +18,13 @@ from supertokens_python.recipe.session.framework.fastapi import verify_session
 
 init(
     app_info=InputAppInfo(
-        app_name="Awesome app",
+        app_name="Recommender System",
         api_domain="http://localhost:8000",
         website_domain="http://localhost:3000",
-        api_base_path="/api/v1/auth",
-        website_base_path="/"
+        api_base_path=f"{settings.API_V1_STR}/auth/",
+        website_base_path="/auth/"
     ),
     supertokens_config=SupertokensConfig(
-        # try.supertokens.com is for demo purposes. Replace this with the address of your core instance (sign up on supertokens.com), or self host a core.
         connection_uri="http://recommender-login:3567",
         # api_key="IF YOU HAVE AN API KEY FOR THE CORE, ADD IT HERE"
     ),
@@ -34,7 +33,7 @@ init(
         session.init(), # initializes session features
         emailpassword.init()
     ],
-    # mode='asgi' # use wsgi if you are running using gunicorn,
+    mode='asgi', # use wsgi if you are running using gunicorn,
     telemetry=False
 )
 
