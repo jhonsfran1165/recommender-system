@@ -28,6 +28,7 @@ dask = "^2022.5.0"
 meilisearch = "^0.18.3"
 orjson = "^3.6.8"
 supertokens-python = "^0.8.1"
+yellowbrick = "^1.4"
 
 [tool.poetry.dev-dependencies]
 pylint = "2.4.4"

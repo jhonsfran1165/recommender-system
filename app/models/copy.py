@@ -9,9 +9,19 @@ from sqlalchemy.orm import relationship
 if TYPE_CHECKING:
     from app.models import Rule  # noqa: F401
 
+
 class Copy(Base, CommonColumnsMixin):
-    id = Column(Integer, primary_key=True, index=True)
-    copy_title = Column(String, index=True, nullable=False, doc="Title of the copy", comment="Title of the copy")
+    id = Column(
+        Integer, primary_key=True, index=True
+    )
+
+    copy_title = Column(
+        String,
+        index=True,
+        nullable=False,
+        doc="Title of the copy",
+        comment="Title of the copy"
+    )
 
     title_id = Column(
         Integer,
@@ -21,8 +31,17 @@ class Copy(Base, CommonColumnsMixin):
         comment="Title ID of the copy. Many copy are created from a Title"
     )
 
-    medium_type = Column(String, doc="Media type of the copy", comment="Media type of the copy")
-    author_name = Column(String, doc="Author of the Copy", comment="Author of the Copy")
+    medium_type = Column(
+        String,
+        doc="Media type of the copy",
+        comment="Media type of the copy"
+    )
+
+    author_name = Column(
+        String,
+        doc="Author of the Copy",
+        comment="Author of the Copy"
+    )
 
     pr_classmark = Column(
         String,
@@ -48,7 +67,6 @@ class Copy(Base, CommonColumnsMixin):
         comment="Library where the copy is located"
     )
 
-    # TODO: is it necessary to add owner user?
     antecedents = relationship(
         "Rule",
         foreign_keys="[Rule.antecedents_id]",
@@ -60,8 +78,6 @@ class Copy(Base, CommonColumnsMixin):
         foreign_keys="[Rule.consequents_id]",
         back_populates="consequents"
     )
-
-
 
     def __str__(self):
         return str(self.id)

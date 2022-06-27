@@ -85,3 +85,65 @@ SELECT
 code, year, month, count(day_month) as frecuency, sum(books) as total
 FROM tmp_data
 GROUP BY code, year, month
+
+
+SELECT
+	code, trans_copy_code_id, trans_date_id, trans_type_code
+FROM
+	public.copytransaction, public.transactiontype, public.copy, public.student, public.date
+WHERE
+	trans_location_code_id = 5 AND
+	code IN (199428135, 199330628) AND
+	--trans_copy_code_id = 217052 AND
+	--trans_type_code IN ('ISS', 'RET', 'REN') AND
+	trans_date_id = date.id AND
+	trans_copy_code_id = copy.id AND
+	trans_borrower_code = student.id AND
+	trans_type_id = transactiontype.id
+
+ORDER BY code, trans_copy_code_id, trans_date_id, trans_type_code
+
+
+
+SELECT DISTINCT
+iss.code, iss.trans_copy_code_id, iss.trans_date_id as iss_date, ret.trans_date_id as ret_date
+FROM (SELECT
+	code, trans_copy_code_id, trans_date_id, trans_type_code
+FROM
+	public.copytransaction, public.transactiontype, public.copy, public.student, public.date
+WHERE
+	trans_location_code_id = 5 AND
+	code IN (199428135, 199330628) AND
+	--trans_copy_code_id = 217052 AND
+	trans_type_code IN ('ISS') AND
+	trans_date_id = date.id AND
+	trans_copy_code_id = copy.id AND
+	trans_borrower_code = student.id AND
+	trans_type_id = transactiontype.id
+
+ORDER BY code, trans_copy_code_id, trans_date_id, trans_type_code) iss,
+
+(SELECT
+	code, trans_copy_code_id, trans_date_id, trans_type_code
+FROM
+	public.copytransaction, public.transactiontype, public.copy, public.student, public.date
+WHERE
+	trans_location_code_id = 5 AND
+	code IN (199428135, 199330628) AND
+	--trans_copy_code_id = 217052 AND
+	trans_type_code IN ('RET') AND
+	trans_date_id = date.id AND
+	trans_copy_code_id = copy.id AND
+	trans_borrower_code = student.id AND
+	trans_type_id = transactiontype.id
+
+ORDER BY code, trans_copy_code_id, trans_date_id, trans_type_code) ret
+
+WHERE
+iss.code = ret.code AND
+iss.trans_copy_code_id = ret.trans_copy_code_id AND
+iss.trans_date_id <= ret.trans_date_id AND
+ret.trans_type_code = 'RET'
+
+ORDER BY code, trans_copy_code_id, iss_date
+

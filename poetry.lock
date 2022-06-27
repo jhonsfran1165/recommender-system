@@ -2266,6 +2266,21 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "yellowbrick"
+version = "1.4"
+description = "A suite of visual analysis and diagnostic tools for machine learning."
+category = "main"
+optional = false
+python-versions = ">=3.4, <4"
+
+[package.dependencies]
+cycler = ">=0.10.0"
+matplotlib = ">=2.0.2,<3.0.0 || >3.0.0"
+numpy = ">=1.16.0"
+scikit-learn = ">=1.0.0"
+scipy = ">=1.0.0"
+
+[[package]]
 name = "zipp"
 version = "3.8.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
@@ -2280,7 +2295,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<4.0"
-content-hash = "92b00f2bf4ff8d93d6e28acee0833c7b0645b3764fe5a6750a97c6e30c447231"
+content-hash = "b553870b4cbb16aa9f32b2aa78d9266c9dd133bf5a8dd53b94b8290b2fcf151a"
 
 [metadata.files]
 aiofiles = [
@@ -3926,6 +3941,10 @@ wrapt = [
 yapf = [
     {file = "yapf-0.31.0-py2.py3-none-any.whl", hash = "sha256:e3a234ba8455fe201eaa649cdac872d590089a18b661e39bbac7020978dd9c2e"},
     {file = "yapf-0.31.0.tar.gz", hash = "sha256:408fb9a2b254c302f49db83c59f9aa0b4b0fd0ec25be3a5c51181327922ff63d"},
+]
+yellowbrick = [
+    {file = "yellowbrick-1.4-py3-none-any.whl", hash = "sha256:16cc4af0474272b9ce103e3d061ff4b74edacf281f206cd7c483418357c5831b"},
+    {file = "yellowbrick-1.4.tar.gz", hash = "sha256:f690b8f8b7e6962dfc059ec1d59606913561addcc5948377d91f1681ef46874b"},
 ]
 zipp = [
     {file = "zipp-3.8.0-py3-none-any.whl", hash = "sha256:c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099"},

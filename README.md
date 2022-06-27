@@ -25,3 +25,18 @@ https://towardsdatascience.com/fp-growth-frequent-pattern-generation-in-data-min
 
 
 https://arno.uvt.nl/show.cgi?fid=149422
+
+
+https://www.youtube.com/watch?v=jLtaqJe5fNM&list=LL&index=3
+
+
+https://towardsdatascience.com/build-your-own-clustering-based-recommendation-engine-in-15-minutes-bdddd591d394
+
+https://towardsdatascience.com/unsupervised-classification-project-building-a-movie-recommender-with-clustering-analysis-and-4bab0738efe6
+
+
+kmeans on catagorical data
+
+https://datascience.stackexchange.com/questions/22/k-means-clustering-for-mixed-numeric-and-categorical-data
+
+https://www.pluralsight.com/guides/cleaning-up-data-from-outliers
