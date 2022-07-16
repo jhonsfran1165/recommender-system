@@ -138,6 +138,9 @@ def kmeans(program_code, sede_code, jornada_code):
         program_code=program_code
     ), con=conn)
 
+    if df_iss.empty and df_ret.empty:
+        return []
+
     df_iss = df_iss.reset_index(drop=True)
     df_ret = df_ret.reset_index(drop=True)
 
@@ -172,6 +175,9 @@ def kmeans(program_code, sede_code, jornada_code):
     df['trans_tittle_code_id'] = df['trans_tittle_code_id'].astype(str)
     df['duration'] = df['RET'] - df['ISS'] + pd.Timedelta(days=1)
     df['duration'] = df['duration'].dt.days
+
+    # the limit of a duratiohn is 100 days
+    df = df[df['duration'] <= 100].sort_values('duration')
 
     df_titles = df[['trans_tittle_code_id', 'title_name']]
     df_titles = df_titles.set_index('trans_tittle_code_id')

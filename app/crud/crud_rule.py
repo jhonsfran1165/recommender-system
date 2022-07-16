@@ -13,8 +13,18 @@ ModelType = TypeVar("ModelType", bound=Base)
 
 # TODO: check this out
 class CRUDRules(CRUDBase[Rule, RuleCreate, RuleUpdate]):
-    def get_by_antecedent(self, db: Session, antecedents_id: int) -> List[ModelType]:
-        return db.query(self.model).filter(self.model.antecedents_id == antecedents_id).all()
+    def get_by_antecedent(
+        self,
+        db: Session,
+        antecedents_id: int,
+        confidence: float,
+        lift: float
+    ) -> List[ModelType]:
+        return db.query(self.model).filter(
+            (self.model.antecedents_id == antecedents_id),
+            (self.model.confidence >= confidence),
+            (self.model.lift >= lift),
+        ).all()
 
 
 

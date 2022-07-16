@@ -3,17 +3,20 @@ from typing import Any, List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app import crud, models, schemas
+from app import crud, schemas
 from app.api import deps
+
+from supertokens_python.recipe.session.framework.fastapi import verify_session
+from supertokens_python.recipe.session import SessionContainer
 
 router = APIRouter()
 
 
 @router.get("/copy", response_model=schemas.Copy)
-def copy(
+def get_copy(
     *,
     db: Session = Depends(deps.get_db),
-    # current_user: models.User = Depends(deps.get_current_active_user),
+    session: SessionContainer = Depends(verify_session(session_required=True)),
     id: int
 ) -> Any:
     """
@@ -28,6 +31,7 @@ def copy(
 async def get_copies_by_title(
     *,
     db: Session = Depends(deps.get_db),
+    session: SessionContainer = Depends(verify_session(session_required=True)),
     id: int
 ) -> Any:
     """

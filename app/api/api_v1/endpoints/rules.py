@@ -1,8 +1,7 @@
+from typing import Any, List
 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-import json
-from typing import Any, List
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -14,55 +13,47 @@ from app import crud, schemas
 from app.api import deps
 from app.views.rules.kmeans import kmeans
 
-import meilisearch
-
 router = APIRouter()
 
-client = meilisearch.Client('http://recommender-search:7700', "asd7687asdasdkjhwrdf97fcsadfs")
 
 @router.get("/rules", response_model=List[schemas.Rule])
 async def rules(
     *,
     db: Session = Depends(deps.get_db),
-    session: SessionContainer = Depends(verify_session(session_required=False)),
+    session: SessionContainer = Depends(verify_session(session_required=True)),
     id: int,
+    confidence: float,
+    lift: float
 ) -> Any:
     """
-    Retrieve rule.
+    Retrieve rules.
     """
-    rules = crud.rule.get_by_antecedent(db, antecedents_id=id)
+    rules = crud.rule.get_by_antecedent(
+        db,
+        antecedents_id=id,
+        confidence=confidence,
+        lift=lift
+    )
     return rules
-
-
-@router.get("/rule", response_model=schemas.Rule)
-async def get_rules_by_id(
-    *,
-    db: Session = Depends(deps.get_db),
-    session: SessionContainer = Depends(verify_session(session_required=False)),
-    id: int
-) -> Any:
-    """
-    Retrieve rule.
-    """
-    rule = crud.rule.get(db, id=id)
-
-    return rule
 
 
 @router.get("/kmeans")
 async def get_kmeans(
     *,
     db: Session = Depends(deps.get_db),
-    session: SessionContainer = Depends(verify_session(session_required=False))
+    session: SessionContainer = Depends(verify_session(session_required=True)),
+    prog: int,
+    jor: str,
+    sede: int
 ) -> Any:
     """
     Retrieve kmeans.
     """
     # TODO: use info session to set this up
     result = kmeans(
-        program_code=3743,
-        sede_code=0,
-        jornada_code="DIU"
+        program_code=prog,
+        sede_code=sede,
+        jornada_code=jor
     )
 
     json_compatible_item_data = jsonable_encoder(result)

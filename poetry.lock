@@ -57,14 +57,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "apyori"
-version = "1.1.2"
-description = "Simple Apriori algorithm Implementation."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "argon2-cffi"
 version = "21.3.0"
 description = "The secure Argon2 password hashing algorithm."
@@ -161,6 +153,14 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "atomicwrites"
+version = "1.4.1"
+description = "Atomic file writes."
+category = "dev"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[[package]]
 name = "attrs"
 version = "21.4.0"
 description = "Classes Without Boilerplate"
@@ -204,22 +204,6 @@ description = "Specifications for callback functions passed in to an API"
 category = "dev"
 optional = false
 python-versions = "*"
-
-[[package]]
-name = "bcrypt"
-version = "3.2.0"
-description = "Modern password hashing for your software and your servers"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-cffi = ">=1.1"
-six = ">=1.4.1"
-
-[package.extras]
-tests = ["pytest (>=3.2.1,!=3.3.0)"]
-typecheck = ["mypy"]
 
 [[package]]
 name = "beautifulsoup4"
@@ -307,14 +291,6 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
-name = "cloudpickle"
-version = "2.0.0"
-description = "Extended pickling support for Python objects"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[[package]]
 name = "colorama"
 version = "0.4.3"
 description = "Cross-platform colored terminal text."
@@ -370,30 +346,6 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
-name = "dask"
-version = "2022.5.0"
-description = "Parallel PyData with Task Scheduling"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-
-[package.dependencies]
-cloudpickle = ">=1.1.1"
-fsspec = ">=0.6.0"
-packaging = ">=20.0"
-partd = ">=0.3.10"
-pyyaml = ">=5.3.1"
-toolz = ">=0.8.2"
-
-[package.extras]
-array = ["numpy (>=1.18)"]
-complete = ["bokeh (>=2.4.2)", "distributed (==2022.05.0)", "jinja2", "numpy (>=1.18)", "pandas (>=1.0)"]
-dataframe = ["numpy (>=1.18)", "pandas (>=1.0)"]
-diagnostics = ["bokeh (>=2.4.2)", "jinja2"]
-distributed = ["distributed (==2022.05.0)"]
-test = ["pytest", "pytest-rerunfailures", "pytest-xdist", "pre-commit"]
-
-[[package]]
 name = "debugpy"
 version = "1.6.0"
 description = "An implementation of the Debug Adapter Protocol for Python"
@@ -446,29 +398,6 @@ doh = ["h2 (>=4.1.0)", "httpx (>=0.21.1)", "requests (>=2.23.0,<3.0.0)", "reques
 idna = ["idna (>=2.1,<4.0)"]
 trio = ["trio (>=0.14,<0.20)"]
 wmi = ["wmi (>=1.5.1,<2.0.0)"]
-
-[[package]]
-name = "ecdsa"
-version = "0.17.0"
-description = "ECDSA cryptographic signature library (pure python)"
-category = "main"
-optional = false
-python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-
-[package.dependencies]
-six = ">=1.9.0"
-
-[package.extras]
-gmpy = ["gmpy"]
-gmpy2 = ["gmpy2"]
-
-[[package]]
-name = "efficient-apriori"
-version = "2.0.1"
-description = "An efficient Python implementation of the Apriori     algorithm."
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "email-validator"
@@ -589,37 +518,6 @@ type1 = ["xattr"]
 ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=14.0.0)"]
 woff = ["zopfli (>=0.1.4)", "brotlicffi (>=0.8.0)", "brotli (>=1.0.1)"]
-
-[[package]]
-name = "fsspec"
-version = "2022.3.0"
-description = "File-system specification"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-abfs = ["adlfs"]
-adl = ["adlfs"]
-arrow = ["pyarrow (>=1)"]
-dask = ["dask", "distributed"]
-dropbox = ["dropboxdrivefs", "requests", "dropbox"]
-entrypoints = ["importlib-metadata"]
-fuse = ["fusepy"]
-gcs = ["gcsfs"]
-git = ["pygit2"]
-github = ["requests"]
-gs = ["gcsfs"]
-gui = ["panel"]
-hdfs = ["pyarrow (>=1)"]
-http = ["requests", "aiohttp"]
-libarchive = ["libarchive-c"]
-oci = ["ocifs"]
-s3 = ["s3fs"]
-sftp = ["paramiko"]
-smb = ["smbprotocol"]
-ssh = ["paramiko"]
-tqdm = ["tqdm"]
 
 [[package]]
 name = "gitlint"
@@ -784,6 +682,14 @@ zipp = {version = ">=3.1.0", markers = "python_version < \"3.10\""}
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=9)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)"]
+
+[[package]]
+name = "iniconfig"
+version = "1.1.1"
+description = "iniconfig: brain-dead simple config-ini parsing"
+category = "dev"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "ipykernel"
@@ -1066,14 +972,6 @@ name = "lazy-object-proxy"
 version = "1.4.3"
 description = "A fast and thorough lazy object proxy."
 category = "dev"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-
-[[package]]
-name = "locket"
-version = "1.0.0"
-description = "File-based locks for Python on Linux and Windows"
-category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -1396,35 +1294,6 @@ qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["docopt", "pytest (<6.0.0)"]
 
 [[package]]
-name = "partd"
-version = "1.2.0"
-description = "Appendable key-value storage"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-locket = "*"
-toolz = "*"
-
-[package.extras]
-complete = ["numpy (>=1.9.0)", "pandas (>=0.19.0)", "pyzmq", "blosc"]
-
-[[package]]
-name = "passlib"
-version = "1.7.4"
-description = "comprehensive password hashing framework supporting over 30 schemes"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.extras]
-argon2 = ["argon2-cffi (>=18.2.0)"]
-bcrypt = ["bcrypt (>=3.1.0)"]
-build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.1)"]
-totp = ["cryptography"]
-
-[[package]]
 name = "pexpect"
 version = "4.8.0"
 description = "Pexpect allows easy control of interactive console applications."
@@ -1462,6 +1331,18 @@ python-versions = ">=3.7"
 [package.extras]
 docs = ["olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinx-rtd-theme (>=1.0)", "sphinxext-opengraph"]
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
+
+[[package]]
+name = "pluggy"
+version = "1.0.0"
+description = "plugin and hook calling mechanisms for python"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "premailer"
@@ -1563,14 +1444,6 @@ description = "library with cross-python path, ini-parsing, io, code, log facili
 category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-
-[[package]]
-name = "pyasn1"
-version = "0.4.8"
-description = "ASN.1 types and codecs"
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "pycodestyle"
@@ -1675,6 +1548,27 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "pytest"
+version = "7.1.2"
+description = "pytest: simple powerful testing with Python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
+attrs = ">=19.2.0"
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+iniconfig = "*"
+packaging = "*"
+pluggy = ">=0.12,<2.0"
+py = ">=1.8.2"
+tomli = ">=1.0.0"
+
+[package.extras]
+testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -1695,24 +1589,6 @@ python-versions = ">=3.5"
 
 [package.extras]
 cli = ["click (>=5.0)"]
-
-[[package]]
-name = "python-jose"
-version = "3.3.0"
-description = "JOSE implementation in Python"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-ecdsa = "!=0.15"
-pyasn1 = "*"
-rsa = "*"
-
-[package.extras]
-cryptography = ["cryptography (>=3.4.0)"]
-pycrypto = ["pycrypto (>=2.6.0,<2.7.0)", "pyasn1"]
-pycryptodome = ["pycryptodome (>=3.3.1,<4.0.0)", "pyasn1"]
 
 [[package]]
 name = "python-multipart"
@@ -1812,17 +1688,6 @@ idna = {version = "*", optional = true, markers = "extra == \"idna2008\""}
 
 [package.extras]
 idna2008 = ["idna"]
-
-[[package]]
-name = "rsa"
-version = "4.8"
-description = "Pure-Python RSA implementation"
-category = "main"
-optional = false
-python-versions = ">=3.6,<4"
-
-[package.dependencies]
-pyasn1 = ">=0.1.3"
 
 [[package]]
 name = "rx"
@@ -2100,14 +1965,6 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
-name = "toolz"
-version = "0.11.2"
-description = "List processing tools and functional utilities"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[[package]]
 name = "tornado"
 version = "6.1"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
@@ -2295,7 +2152,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<4.0"
-content-hash = "b553870b4cbb16aa9f32b2aa78d9266c9dd133bf5a8dd53b94b8290b2fcf151a"
+content-hash = "8f3da077b56ab2ca1312d6f03b7d1759e32629acf038fee73054db86bbda41b6"
 
 [metadata.files]
 aiofiles = []
@@ -2303,7 +2160,6 @@ alembic = []
 aniso8601 = []
 anyio = []
 appnope = []
-apyori = []
 argon2-cffi = []
 argon2-cffi-bindings = []
 arrow = []
@@ -2312,11 +2168,11 @@ astroid = []
 asttokens = []
 async-exit-stack = []
 async-generator = []
+atomicwrites = []
 attrs = []
 autopep8 = []
 babel = []
 backcall = []
-bcrypt = []
 beautifulsoup4 = []
 bleach = []
 cachetools = []
@@ -2325,20 +2181,16 @@ cffi = []
 chardet = []
 charset-normalizer = []
 click = []
-cloudpickle = []
 colorama = []
 cryptography = []
 cssselect = []
 cssutils = []
 cycler = []
-dask = []
 debugpy = []
 decorator = []
 defusedxml = []
 deprecated = []
 dnspython = []
-ecdsa = []
-efficient-apriori = []
 email-validator = []
 emails = []
 entrypoints = []
@@ -2347,7 +2199,6 @@ fastapi = []
 fastjsonschema = []
 filelock = []
 fonttools = []
-fsspec = []
 gitlint = []
 graphene = []
 graphql-core = []
@@ -2360,6 +2211,7 @@ httpx = []
 idna = []
 importlib-metadata = []
 importlib-resources = []
+iniconfig = []
 ipykernel = []
 ipython = []
 ipython-genutils = []
@@ -2378,7 +2230,6 @@ jupyterlab-pygments = []
 jupyterlab-server = []
 kiwisolver = []
 lazy-object-proxy = []
-locket = []
 lxml = []
 mako = []
 markupsafe = []
@@ -2401,12 +2252,11 @@ packaging = []
 pandas = []
 pandocfilters = []
 parso = []
-partd = []
-passlib = []
 pexpect = []
 phonenumbers = []
 pickleshare = []
 pillow = []
+pluggy = []
 premailer = []
 prometheus-client = []
 promise = []
@@ -2416,7 +2266,6 @@ psycopg2-binary = []
 ptyprocess = []
 pure-eval = []
 py = []
-pyasn1 = []
 pycodestyle = []
 pycparser = []
 pycryptodome = []
@@ -2427,9 +2276,9 @@ pyjwt = []
 pylint = []
 pyparsing = []
 pyrsistent = []
+pytest = []
 python-dateutil = []
 python-dotenv = []
-python-jose = []
 python-multipart = []
 pytz = []
 pywin32 = []
@@ -2439,7 +2288,6 @@ pyzmq = []
 requests = []
 requests-file = []
 rfc3986 = []
-rsa = []
 rx = []
 scikit-learn = []
 scipy = []
@@ -2461,7 +2309,6 @@ threadpoolctl = []
 tldextract = []
 toml = []
 tomli = []
-toolz = []
 tornado = []
 traitlets = []
 typing-extensions = []
