@@ -2,8 +2,7 @@ from typing import Any, List
 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from supertokens_python.recipe.session.framework.fastapi import verify_session
@@ -12,11 +11,16 @@ from supertokens_python.recipe.session import SessionContainer
 from app import crud, schemas
 from app.api import deps
 from app.views.rules.kmeans import kmeans
+from app.core.exceptions import ModelError404
 
 router = APIRouter()
 
 
-@router.get("/rules", response_model=List[schemas.Rule])
+@router.get(
+    "/rules",
+    response_model=List[schemas.Rule],
+    responses={404: {"model": ModelError404}}
+)
 async def rules(
     *,
     db: Session = Depends(deps.get_db),
@@ -34,10 +38,14 @@ async def rules(
         confidence=confidence,
         lift=lift
     )
+
+    if rules is None or len(rules) == 0:
+        raise HTTPException(status_code=404, detail="Rules not found")
+
     return rules
 
 
-@router.get("/kmeans")
+@router.get("/kmeans", responses={404: {"model": ModelError404}})
 async def get_kmeans(
     *,
     db: Session = Depends(deps.get_db),
@@ -55,6 +63,9 @@ async def get_kmeans(
         sede_code=sede,
         jornada_code=jor
     )
+
+    if result is None or len(result) == 0:
+        raise HTTPException(status_code=404, detail="Clusters not found")
 
     json_compatible_item_data = jsonable_encoder(result)
     return JSONResponse(content=json_compatible_item_data)
