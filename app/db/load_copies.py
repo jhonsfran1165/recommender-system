@@ -4,31 +4,30 @@ from app import crud, schemas
 from app.utils import read_in_chunks
 from app.db import base  # noqa: F401
 
-# make sure all SQL Alchemy models are imported (app.db.base) before initializing DB
-# otherwise, SQL Alchemy might fail to initialize relationships properly
-# for more details: https://github.com/tiangolo/full-stack-fastapi-postgresql/issues/28
-
 
 def load_copies(db: Session) -> None:
     chunk_iter = read_in_chunks("etl/copies_modified.csv", header=0, sep='*')
 
     # data sample
-    # C.COPYNO                                                                                 58199
-    # T.TITLENO                                                                                38959
-    # C.TITLE                                                              Nuclear radiation physics
-    # T.MEDIUM                                                                                  IMPR
-    # A.SNAMEDECODE(A.FNAME,NULL,NULL,,A.FNAME)                                   Lapp, Ralph Eugene
-    # T.PRCLASSMARK                                                                            QC173
-    # C.SHELFMARK                                                                        QC173 L316n
-    # C.BARCODE                                                                             112492.0
-    # L.LOCLD                                      Biblioteca Mario Carvajal - Melendez - Cali. U...
+    # C.COPYNO                                             58199
+    # T.TITLENO        38959
+    # C.TITLE                          Nuclear radiation physics
+    # T.MEDIUM          IMPR
+    # A.SNAMEDECODE(A.FNAME,NULL,NULL,,A.FNAME)        Lapp, Ralph Eugene
+    # T.PRCLASSMARK    QC173
+    # C.SHELFMARKQC173 L316n
+    # C.BARCODE     112492.0
+    # L.LOCLD  Biblioteca Mario Carvajal - Melendez - Cali. U...
 
     for chunk in chunk_iter:
         for index, row in chunk.iterrows():
             try:
                 id = int(row['C.COPYNO'])
             except ValueError:
-                print("The id of the copy is not an integer... skipping", row['C.COPYNO'])
+                print(
+                    "The id of the copy is not an integer... skipping",
+                    row['C.COPYNO']
+                    )
 
             copy = crud.copy.get(db, id=id)
 
@@ -36,7 +35,9 @@ def load_copies(db: Session) -> None:
                 title_id = int(row['T.TITLENO'])
                 copy_title = str(row['C.TITLE'])
                 medium_type = str(row['T.MEDIUM'])
-                author_name = str(row['A.SNAMEDECODE(A.FNAME,NULL,NULL,,A.FNAME)'])
+                author_name = str(
+                    row['A.SNAMEDECODE(A.FNAME,NULL,NULL,,A.FNAME)']
+                )
                 pr_classmark = str(row['T.PRCLASSMARK'])
                 shelfmark = str(row['C.SHELFMARK'])
                 bar_code = str(row['C.BARCODE'])
@@ -54,6 +55,6 @@ def load_copies(db: Session) -> None:
                         location=location
                     )
                     copy = crud.copy.create(db, obj_in=copy_in)  # noqa: F841
-                except:
+                except Exception as e:
                     print("There was an error inserting the title", id)
-                    raise
+                    raise e

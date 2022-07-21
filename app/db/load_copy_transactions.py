@@ -1,18 +1,15 @@
 from datetime import datetime
-
 from sqlalchemy.orm import Session
 
 from app import crud, schemas
 from app.utils import read_in_chunks
 from app.db import base  # noqa: F401
 
-# make sure all SQL Alchemy models are imported (app.db.base) before initializing DB
-# otherwise, SQL Alchemy might fail to initialize relationships properly
-# for more details: https://github.com/tiangolo/full-stack-fastapi-postgresql/issues/28
-
 
 def load_copy_transactions(db: Session) -> None:
-    chunk_iter = read_in_chunks("etl/copytrans_modified.csv", header=0, sep='*')
+    chunk_iter = read_in_chunks(
+        "etl/copytrans_modified.csv", header=0, sep='*'
+    )
 
     # TRANDATE	CTRANTP	BORCODE	LOCATION	TITLENO	COPYNO	DELETED
 
@@ -39,35 +36,20 @@ def load_copy_transactions(db: Session) -> None:
                 elif (trans_borrower > 8000000 and trans_borrower < 8999999):
                     trans_borrower = int('18' + str(row['BORCODE']))
 
-                trans_type  = crud.transaction_type.get_by_code(
+                trans_type = crud.transaction_type.get_by_code(
                     db,
                     trans_type_code=trans_type
                 )
 
-                trans_location  = crud.location.get_by_location_code(
+                trans_location = crud.location.get_by_location_code(
                     db,
                     location_code=trans_location
                 )
 
                 trans_title = crud.title.get(db, id=trans_title)
                 trans_copy = crud.copy.get(db, id=trans_copy)
-                trans_borrower = crud.student.get_by_student_code(db, code=trans_borrower)
-
-                # TODO: transform to int but before check if None
-                print(
-                    trans_type,
-                    trans_title,
-                    trans_copy,
-                    trans_location,
-                    trans_borrower
-                )
-
-                print(
-                    type(trans_type),
-                    type(trans_title),
-                    type(trans_copy),
-                    type(trans_location),
-                    type(trans_borrower)
+                trans_borrower = crud.student.get_by_student_code(
+                    db, code=trans_borrower
                 )
 
                 if (
@@ -90,14 +72,22 @@ def load_copy_transactions(db: Session) -> None:
                             trans_borrower_deleted=trans_borrower_deleted
                         )
 
-                        copytrans_in_db = crud.copy_transaction.create(db, obj_in=copytrans_in)  # noqa: F841
+                        copytrans_in_db = crud.copy_transaction.create(
+                            db, obj_in=copytrans_in
+                        )  # noqa: F841
 
                         print("Copy trans added", trans_title)
 
                     except Exception as inst:
-                        print("There was an error inserting the Copy trans", inst)
-                        raise
+                        print(
+                            "There was an error inserting the Copy trans",
+                            inst
+                        )
+
+                        raise inst
 
             except ValueError as error:
-                print("The transaction can't be transformed... skipping", error)
-
+                print(
+                    "The transaction can't be transformed... skipping",
+                    error
+                )

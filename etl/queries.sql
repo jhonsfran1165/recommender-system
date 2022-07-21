@@ -147,3 +147,24 @@ ret.trans_type_code = 'RET'
 
 ORDER BY code, trans_copy_code_id, iss_date
 
+
+-- report rules
+
+SELECT
+	rule.id as rule_id, antecedents_copy.id as antecedent, round(antecedent_support * 40000) as antecedent_support,
+	round(consequent_support * 40000) as consequent_support, round(confidence::numeric, 2) as confidence,
+	round(lift::numeric, 2) as lift,
+	antecedents_copy.copy_title as antecedents_copy_title, antecedents_copy.title_id as antecedents_title_id,
+	antecedents_copy.medium_type as antecedent_medium_type, antecedents_copy.author_name as antecedent_author_name,
+	consequents_copy.copy_title as consequents_copy_title, consequents_copy.title_id as consequents_title_id,
+	consequents_copy.medium_type as consequents_medium_type, consequents_copy.author_name as consequents_author_name
+FROM public.rule
+LEFT JOIN public.copy as antecedents_copy
+	ON rule.antecedents_id = antecedents_copy.id
+LEFT JOIN public.copy as consequents_copy
+	ON rule.consequents_id = consequents_copy.id
+WHERE
+	rule.confidence <= 0.3
+	--AND rule.lift = 1
+
+LIMIT 100
