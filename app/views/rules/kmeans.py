@@ -249,7 +249,7 @@ def kmeans(program_code, sede_code, jornada_code):
     for i in range(0, n_clusters):
         df = df_final[df_final['cluster'] == i].sort_values(
             'score', ascending=False
-        ).head(10)
+        ).head(20)
 
         json_response = json.loads(
             df[[

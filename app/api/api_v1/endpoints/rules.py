@@ -2,7 +2,7 @@ from typing import Any, List
 
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from supertokens_python.recipe.session.framework.fastapi import verify_session
@@ -25,9 +25,9 @@ async def rules(
     *,
     db: Session = Depends(deps.get_db),
     session: SessionContainer = Depends(verify_session(session_required=True)),
-    id: int,
-    confidence: float,
-    lift: float
+    id: int = Query(default=1, description="Antecedent id"),
+    confidence: float = Query(default=1, description="Confianza mínima"),
+    lift: float = Query(default=1, description="Lift Mínimo")
 ) -> Any:
     """
     Retrieve rules.
@@ -50,9 +50,9 @@ async def get_kmeans(
     *,
     db: Session = Depends(deps.get_db),
     session: SessionContainer = Depends(verify_session(session_required=True)),
-    prog: int,
-    jor: str,
-    sede: int
+    prog: int = Query(default=1, description="Código de programa"),
+    jor: str = Query(default="DIU", description="Jornada"),
+    sede: int = Query(default=1, description="Código de Sede")
 ) -> Any:
     """
     Retrieve kmeans.
